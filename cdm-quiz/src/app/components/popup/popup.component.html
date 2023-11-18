@@ -11,7 +11,7 @@
         *ngIf="isProgress"
         [questions]="questions"
         [answerResult]="answerResult"
-        (isRigth)="chooseAnswer($event.id, $event.answer)"
+        (isRigth)="chooseAnswer($event)"
         (endedQuiz)="endQuiz()">
     </question>
     <results 

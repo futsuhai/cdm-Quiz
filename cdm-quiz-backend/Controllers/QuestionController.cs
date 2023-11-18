@@ -30,24 +30,17 @@ namespace cdm_quiz_backend.Controllers
             return _mapper.Map<List<QuestionModel>>(questions);
         }
 
-        [HttpPost("ChooseAnswer")]
-        public async Task<IActionResult> ChooseAnswer([FromBody] Answer answer)
+        [HttpPut("ChooseAnswer")]
+        public async Task<IActionResult> ChooseAnswer([FromBody] AnswerModel answer)
         {
             var questions = await _questionService.GetAllAsync();
             var matchingQuestion = questions.FirstOrDefault(q => q.Id.ToString() == answer.QuestionId);
-            if (matchingQuestion != null)
+            if (matchingQuestion != null && matchingQuestion.Answers != null)
             {
                 matchingQuestion.Answers.TryGetValue(answer.AnswerString, out bool value);
-                if (value)
-                {
-                    int indexOfTrue = matchingQuestion.Answers.Values.ToList().IndexOf(value);
-                    var result = new { Value = value, IndexOfTrue = indexOfTrue };
-                    return Ok(result);
-                } else {
-                    int indexOfTrue = matchingQuestion.Answers.Values.ToList().IndexOf(true);
-                    var result = new { Value = false, IndexOfTrue = indexOfTrue };
-                    return Ok(result);
-                }
+                int indexOfTrue = matchingQuestion.Answers.Values.ToList().IndexOf(true);
+                AnswerResultModel result = new() { Result = value, Index = indexOfTrue };
+                return Ok(result);
             }
             return Ok("Такого вопроса не существует"); // Что вернуть?
         }

@@ -1,5 +1,9 @@
 <h3 class="question__title">{{ questions[currentQuestionsIndex].title }}</h3>
-<button *ngFor="let answer of questions[currentQuestionsIndex].answers" class="question__answer" [ngClass]="answerResult?.value ? 'button_valid' : 'button_invalid'" (click)="chooseAnswer(answer)">
+<button 
+    *ngFor="let answer of questions[currentQuestionsIndex].answers" 
+    class="question__answer" 
+    [ngClass]="answerResult?.result ? 'button_valid' : 'button_invalid'" 
+    (click)="chooseAnswer(answer)">
     {{ answer }}
 </button>
 <button class="question__next button_base" (click)="nextQuestion()">Next</button>

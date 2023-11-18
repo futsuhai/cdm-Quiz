@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { IAnswer } from 'src/app/models/answer.model';
+import { IAnswerResult } from 'src/app/models/answerResult.model';
 import { IQuestion } from 'src/app/models/question.model';
 import { QuizService } from 'src/app/services/quiz.service';
 
@@ -13,7 +15,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 
 export class PopupComponent {
 
-  public answerResult?: any = null;
+  public answerResult?: IAnswerResult;
   public questions: IQuestion[] = [];
   public isQuizStarted: boolean = false;
   public isProgress: boolean = false;
@@ -39,9 +41,9 @@ export class PopupComponent {
     this.score = 0;
   }
 
-  public async chooseAnswer(id: string, answer: string): Promise<void> {
-    const result = await this.quizService.chooseAnswer(id, answer);
-    if (result.value === true) {
+  public async chooseAnswer(answer: IAnswer): Promise<void> {
+    const result = await this.quizService.chooseAnswer(answer);
+    if (result.result === true) {
       this.score++;
     }
     this.answerResult = result;

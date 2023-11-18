@@ -4,8 +4,8 @@ namespace cdm_quiz_backend.Models.Backend
     {
         public Guid Id { get; set; }
 
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
-        public Dictionary<string, bool> Answers { get; set; }
+        public Dictionary<string, bool>? Answers { get; set; }
     }
 }

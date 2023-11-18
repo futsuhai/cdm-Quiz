@@ -1,10 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { IAnswer } from 'src/app/models/answer.model';
+import { IAnswerResult } from 'src/app/models/answerResult.model';
 import { IQuestion } from 'src/app/models/question.model';
-
-interface AnswerEventData {
-  id: string;
-  answer: string;
-}
 
 @Component({
   selector: 'question',
@@ -17,10 +14,10 @@ interface AnswerEventData {
 
 export class QuestionComponent implements OnChanges {
 
-  @Input() answerResult?: any;
+  @Input() answerResult?: IAnswerResult;
   @Input() questions!: IQuestion[];
   @Output() public endedQuiz = new EventEmitter<void>();
-  @Output() public isRigth = new EventEmitter<AnswerEventData>();
+  @Output() public isRigth = new EventEmitter<IAnswer>();
   public currentQuestionsIndex: number = 0;
   public result!: boolean;
 
@@ -38,9 +35,9 @@ export class QuestionComponent implements OnChanges {
   }
 
   public chooseAnswer(answer: string) {
-    const eventData: AnswerEventData = {
-      id: this.questions[this.currentQuestionsIndex].id,
-      answer: answer
+    const eventData: IAnswer = {
+      questionId: this.questions[this.currentQuestionsIndex].id,
+      answerString: answer
     }
     this.isRigth.emit(eventData);
   }
