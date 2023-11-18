@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "ChDTfwy+Mgr5fk61Qf88locWK2OQ1EATvVYf0K4N8r0=",
+  "Source": "cdm-quiz-backend",
+  "BasePath": "_content/cdm-quiz-backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

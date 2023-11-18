@@ -1,0 +1,21 @@
+.button {
+
+    &_base {
+        align-self: center;
+        width: 120px;
+        height: 40px;
+        border-radius: 8px;
+        border: none;
+        background: var(--blue-dark);
+        color: var(--grey-normal);
+        font-size: var(--text-sm);
+    }
+
+    &_valid {
+        background: var(--green);
+    }
+
+    &_invalid {
+        background: var(--red);
+    }
+}

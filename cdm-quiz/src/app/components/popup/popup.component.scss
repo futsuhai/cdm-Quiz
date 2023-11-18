@@ -1,0 +1,38 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+
+    &__title {
+        font-size: var(--text-title-lg);
+        color: var(--blue-dark);
+    }
+
+    &__divider {
+        width: 100%;
+        background: var(--grey-normal);
+    }
+
+    &__question, &__start, &__results {
+        width: 100%;
+    }
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.start {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}

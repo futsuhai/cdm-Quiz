@@ -1,0 +1,26 @@
+.question {
+
+    &__title {
+        font-size: var(--text-title-md);
+        color: var(--blue-dark);
+    }
+
+    &__answer {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        border: 1px solid var(--blue-dark);
+        padding: 0px 8px;
+        border-radius: 4px;
+        font-size: var(--text-sm);
+        color: var(--blue-dark);
+
+        &_valid {
+            background: var(--green);
+        }
+
+        &_invalid {
+            background: var(--red);
+        }
+    }
+}

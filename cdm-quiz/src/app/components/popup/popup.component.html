@@ -1,0 +1,24 @@
+<div class="container">
+    <h2 class="container__title">Simple Quiz</h2>
+    <hr class="container__divider">
+    <start 
+        class="container__start" 
+        *ngIf="!isQuizStarted" 
+        (startedQuiz)="startQuiz()">
+    </start>
+    <question 
+        class="container__question"
+        *ngIf="isProgress"
+        [questions]="questions"
+        [answerResult]="answerResult"
+        (isRigth)="chooseAnswer($event.id, $event.answer)"
+        (endedQuiz)="endQuiz()">
+    </question>
+    <results 
+        class="container__results"
+        *ngIf="isEnd"
+        [score]="score"
+        [length]="questions.length"
+        (restartedQuiz)="restart()">
+    </results>
+</div>
