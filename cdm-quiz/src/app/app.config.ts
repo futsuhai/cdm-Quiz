@@ -6,8 +6,8 @@ import { Injectable } from "@angular/core";
 export class AppConfig {
     private baseUrl = 'http://localhost:5035';
 
-    public get questionsApi(): string {
-        return `${this.baseUrl}/api/questions`;
+    public get quizzesApi(): string {
+        return `${this.baseUrl}/api/quizzes`;
     }
 
 }

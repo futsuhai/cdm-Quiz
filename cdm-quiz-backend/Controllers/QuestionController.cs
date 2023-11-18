@@ -1,48 +1,42 @@
 using AutoMapper;
-using cdm_quiz_backend.Models.Frontend;
+using cdm_quiz_backend.Models.Backend;
+using cdm_quiz_backend.Services.QuizService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace cdm_quiz_backend.Controllers
 {
     [ApiController]
-    [Route("api/questions")]
+    [Route("api/quizzes")]
 
-    public class QuestionController : ControllerBase
+    public class QuizController : ControllerBase
     {
-        private readonly IQuestionService _questionService;
+        private readonly IQuizService _quizService;
         private readonly IMapper _mapper;
-        private readonly ILogger<QuestionController> _logger;
+        private readonly ILogger<QuizController> _logger;
 
-        public QuestionController(
-        IQuestionService questionService,
+        public QuizController(
+        IQuizService quizService,
         IMapper mapper,
-        ILogger<QuestionController> logger)
+        ILogger<QuizController> logger)
         {
             _logger = logger;
-            _questionService = questionService;
+            _quizService = quizService;
             _mapper = mapper;
         }
 
-        [HttpGet("GetQuestions")]
-        public async Task<List<QuestionModel>> GetQuestions()
+        [HttpGet("GetQuizzes")]
+        public async Task<List<QuizModel>> GetQuizzes()
         {
-            var questions = await _questionService.GetAllAsync();
-            return _mapper.Map<List<QuestionModel>>(questions);
+            var quizzes = await _quizService.GetAllAsync();
+            return _mapper.Map<List<QuizModel>>(quizzes);
         }
 
-        [HttpPut("ChooseAnswer")]
-        public async Task<IActionResult> ChooseAnswer([FromBody] AnswerModel answer)
+        [HttpGet("GetQuiz/{id}")]
+        public async Task<QuizModel> GetQuiz(string id)
         {
-            var questions = await _questionService.GetAllAsync();
-            var matchingQuestion = questions.FirstOrDefault(q => q.Id.ToString() == answer.QuestionId);
-            if (matchingQuestion != null && matchingQuestion.Answers != null)
-            {
-                matchingQuestion.Answers.TryGetValue(answer.AnswerString, out bool value);
-                int indexOfTrue = matchingQuestion.Answers.Values.ToList().IndexOf(true);
-                AnswerResultModel result = new() { Result = value, Index = indexOfTrue };
-                return Ok(result);
-            }
-            return Ok("Такого вопроса не существует"); // Что вернуть?
+            var parsedId = Guid.Parse(id);
+            var quiz = await _quizService.GetAsync(parsedId);
+            return _mapper.Map<QuizModel>(quiz);
         }
     }
 }

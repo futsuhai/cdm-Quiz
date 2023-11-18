@@ -1,5 +1,13 @@
 <div class="start-controls">
-    <button class="start-controls__button button_base">Difficult</button>
-    <button class="start-controls__button button_base">Amount</button>
+    <button 
+        class="start-controls__button button_base" 
+        *ngFor="let quiz of quizzes"  
+        (click)="selectQuiz(quiz)">
+        {{ quiz.name }} Quiz
+    </button>
 </div>
-<button class="start__start-button button_base" (click)="startQuiz()">Start Quiz</button>
+<button 
+    class="start__start-button button_base" 
+    (click)="startQuiz(currentQuiz)">
+    Start Quiz
+</button>

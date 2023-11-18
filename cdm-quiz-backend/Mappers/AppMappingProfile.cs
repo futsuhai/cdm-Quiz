@@ -2,12 +2,17 @@ using AutoMapper;
 using cdm_quiz_backend.Models.Backend;
 using cdm_quiz_backend.Models.Frontend;
 
-public class AppMappingProfile : Profile
+namespace cdm_quiz_backend.Mappers
 {
-    public AppMappingProfile()
+    public class AppMappingProfile : Profile
     {
-        CreateMap<QuestionModel, Question>()
-            .ReverseMap()
-            .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers.Keys.ToArray()));
+        public AppMappingProfile()
+        {
+            CreateMap<QuizModel, Quiz>()
+                .ReverseMap();
+            CreateMap<QuestionModel, Question>()
+                .ReverseMap()
+                .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers.Keys.ToArray()));
+        }
     }
 }

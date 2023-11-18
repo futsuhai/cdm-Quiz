@@ -8,6 +8,7 @@ import { QuestionComponent } from './components/question/question.component';
 import { StartComponent } from './components/start/start.component';
 import { ResultsComponent } from './components/results/results.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgSwitch, NgSwitchCase } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgSwitch,
+    NgSwitchCase
   ],
   providers: [],
   bootstrap: [AppComponent]

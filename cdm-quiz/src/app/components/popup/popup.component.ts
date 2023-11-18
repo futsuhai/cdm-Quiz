@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IAnswer } from 'src/app/models/answer.model';
 import { IAnswerResult } from 'src/app/models/answerResult.model';
 import { IQuestion } from 'src/app/models/question.model';
+import { IQuiz, Phase } from 'src/app/models/quiz.model';
 import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
@@ -15,37 +16,37 @@ import { QuizService } from 'src/app/services/quiz.service';
 
 export class PopupComponent {
 
-  public answerResult?: IAnswerResult;
-  public questions: IQuestion[] = [];
-  public isQuizStarted: boolean = false;
-  public isProgress: boolean = false;
-  public isEnd: boolean = false;
+  public quizzes: IQuiz[] = [];
+  public currentQuiz!: IQuiz;
+  public phase: Phase = "Start";
   public score: number = 0;
 
-  constructor(private quizService: QuizService) { }
+  public answerResult?: IAnswerResult;//
 
-  public async startQuiz(): Promise<void> {
-    this.questions = await this.quizService.getQuestions();
-    this.isQuizStarted = !this.isQuizStarted;
-    this.isProgress = !this.isProgress;
+  constructor(private quizService: QuizService) { 
+    this.getQuizzes();
   }
 
-  public endQuiz(): void {
-    this.isEnd = !this.isEnd;
-    this.isProgress = !this.isProgress;
+  public startQuiz(currentQuiz: IQuiz): void {
+    this.currentQuiz = currentQuiz;
+    this.phase = "Progress";
+  }
+
+  public endQuiz(score: number): void {
+    this.phase = "End"
+    this.score = score
   }
 
   public restart(): void {
-    this.isQuizStarted = !this.isQuizStarted;
-    this.isEnd = !this.isEnd;
+    this.phase = "Start"
     this.score = 0;
   }
 
-  public async chooseAnswer(answer: IAnswer): Promise<void> {
-    const result = await this.quizService.chooseAnswer(answer);
-    if (result.result === true) {
-      this.score++;
-    }
-    this.answerResult = result;
+  public async getQuizzes(): Promise<void> {
+    this.quizzes = await this.quizService.getQuizzes();
+  }
+
+  public async getQuiz(id: string): Promise<void> {
+    this.currentQuiz = await this.quizService.getQuiz(id);
   }
 }
