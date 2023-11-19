@@ -1,7 +1,8 @@
 <div class="container" [ngSwitch]="phase">
     <h2 class="container__title">Simple Quiz</h2>
     <hr class="container__divider">
-    <start *ngSwitchCase="'Start'"
+
+    <start *ngSwitchCase=""
         class="container__start" 
         [quizzes]="quizzes"
         (startedQuiz)="startQuiz($event)">

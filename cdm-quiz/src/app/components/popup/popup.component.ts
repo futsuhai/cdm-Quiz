@@ -6,7 +6,7 @@ import { IQuiz, Phase } from 'src/app/models/quiz.model';
 import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
-  selector: 'popup',
+  selector: 'popup', // В ангуляре (да и не только) принято добавлять префикс app- в к тегу компоненту (app-popup). Это делают для того, чтобы не было конфликтов имен со сторонними библиотеками
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss'],
   host: {
@@ -16,14 +16,14 @@ import { QuizService } from 'src/app/services/quiz.service';
 
 export class PopupComponent {
 
-  public quizzes: IQuiz[] = [];
+  public quizzes: IQuiz[] = []; // эта переменная нужна только для того, чтобы её передали внутрь start. Можно её инициализацию туда и перенести
   public currentQuiz!: IQuiz;
   public phase: Phase = "Start";
   public score: number = 0;
   public answerResult?: IAnswerResult | null;
 
   constructor(private quizService: QuizService) {
-    this.getQuizzes();
+    this.getQuizzes(); // В конструкторе очень редко пишут какую-то логику. Для этого есть lifecycle хук OnInit. Вся логика, которая должна быть выполнена во время инициализации, прописывается там
   }
 
   public startQuiz(currentQuiz: IQuiz): void {
