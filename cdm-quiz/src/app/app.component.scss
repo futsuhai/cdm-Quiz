@@ -11,3 +11,12 @@
         padding: 30px;
     }
 }
+
+@media screen and (max-width: 600px) {
+    .popup-container {
+        &__popup {
+            width: 330px;
+            padding: 20px;
+        }
+    }
+}

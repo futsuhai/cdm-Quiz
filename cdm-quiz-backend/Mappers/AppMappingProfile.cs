@@ -12,7 +12,7 @@ namespace cdm_quiz_backend.Mappers
                 .ReverseMap();
             CreateMap<QuestionModel, Question>()
                 .ReverseMap()
-                .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers.Keys.ToArray()));
+                .ForMember(dest => dest.Answers, opt => opt.MapFrom(src => src.Answers.Keys.ToArray())); // исправить
         }
     }
 }

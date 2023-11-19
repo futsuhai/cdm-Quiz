@@ -11,11 +11,8 @@
         font-size: var(--text-sm);
     }
 
-    &_valid {
+    &_active {
         background: var(--green);
-    }
-
-    &_invalid {
-        background: var(--red);
+        color: var(--blue-dark);
     }
 }

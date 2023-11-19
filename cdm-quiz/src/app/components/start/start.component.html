@@ -1,8 +1,10 @@
+<p class="start__text">Please select quiz</p>
 <div class="start-controls">
     <button 
         class="start-controls__button button_base" 
-        *ngFor="let quiz of quizzes"  
-        (click)="selectQuiz(quiz)">
+        [ngClass]="{'button_active' : selectedQuizIndex == i}"
+        *ngFor="let quiz of quizzes; let i = index"  
+        (click)="selectQuiz(quiz, i)">
         {{ quiz.name }} Quiz
     </button>
 </div>

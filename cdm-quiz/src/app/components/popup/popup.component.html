@@ -10,7 +10,8 @@
         class="container__question"
         [quiz]="currentQuiz"
         [answerResult]="answerResult"
-        (endedQuiz)="endQuiz($event)">
+        (choosedAnswer)="chooseAnswer($event)"
+        (endedQuiz)="endQuiz()">
     </question>
     <results *ngSwitchCase="'End'"
         class="container__results"

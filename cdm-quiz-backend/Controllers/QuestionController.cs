@@ -1,5 +1,6 @@
 using AutoMapper;
 using cdm_quiz_backend.Models.Backend;
+using cdm_quiz_backend.Models.Frontend;
 using cdm_quiz_backend.Services.QuizService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,12 +32,11 @@ namespace cdm_quiz_backend.Controllers
             return _mapper.Map<List<QuizModel>>(quizzes);
         }
 
-        [HttpGet("GetQuiz/{id}")]
-        public async Task<QuizModel> GetQuiz(string id)
+        [HttpPut("ChooseAnswer")]
+        public async Task<IActionResult> ChooseAnswer([FromBody] AnswerModel answer)
         {
-            var parsedId = Guid.Parse(id);
-            var quiz = await _quizService.GetAsync(parsedId);
-            return _mapper.Map<QuizModel>(quiz);
+            var result = await _quizService.ChooseAnswer(answer);
+            return Ok(result);
         }
     }
 }

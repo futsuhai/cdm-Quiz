@@ -14,12 +14,16 @@ export class StartComponent {
   @Output() public startedQuiz = new EventEmitter<IQuiz>();
   @Input() quizzes!: IQuiz[];
   public currentQuiz!: IQuiz;
+  public selectedQuizIndex!: number;
 
   public startQuiz(currentQuiz: IQuiz): void {
-    this.startedQuiz.emit(currentQuiz);
+    if (this.selectedQuizIndex != undefined) {
+      this.startedQuiz.emit(currentQuiz);
+    }
   }
 
-  public selectQuiz(quiz: IQuiz): void {
+  public selectQuiz(quiz: IQuiz, index: number): void {
     this.currentQuiz = quiz;
+    this.selectedQuizIndex = index;
   }
 }

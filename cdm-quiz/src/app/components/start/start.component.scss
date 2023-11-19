@@ -1,3 +1,11 @@
+.start{
+
+    &__text{
+        align-self: center;
+        color: var(--blue-dark);
+    }
+}
+
 .start-controls {
     display: flex;
     justify-content: space-around;

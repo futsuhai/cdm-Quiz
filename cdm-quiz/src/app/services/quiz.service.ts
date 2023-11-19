@@ -3,6 +3,8 @@ import { BaseService } from './base.service';
 import { HttpClient } from '@angular/common/http';
 import { AppConfig } from '../app.config';
 import { IQuiz } from '../models/quiz.model';
+import { IAnswer } from '../models/answer.model';
+import { IAnswerResult } from '../models/answerResult.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class QuizService extends BaseService {
     return this.get(`${this.config.quizzesApi}/GetQuizzes`);
   }
 
-  public getQuiz(id: string): Promise<IQuiz> {
-    return this.get(`${this.config.quizzesApi}/GetQuiz/${id}`);
+  public chooseAnswer(answer: IAnswer): Promise<IAnswerResult> {
+    return this.put(`${this.config.quizzesApi}/ChooseAnswer`, answer);
   }
+
 }

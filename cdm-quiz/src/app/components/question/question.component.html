@@ -1,7 +1,15 @@
 <h3 class="question__title">{{ quiz.questions[currentQuestionsIndex].title }}</h3>
 <button 
-    *ngFor="let answer of quiz.questions[currentQuestionsIndex].answers" 
-    class="question__answer">
+    *ngFor="let answer of quiz.questions[currentQuestionsIndex].answers; let i = index" 
+    [ngClass]="{ 
+        'question__answer_valid' : (answerResult?.index == i),
+        'question__answer_invalid' : (answerResult?.result === false && userAnswerIndex == i) 
+            }"
+    class="question__answer"
+    (click)="chooseAnswer(
+        quiz.id,
+        quiz.questions[currentQuestionsIndex].id,
+        answer, i)">
     {{ answer }}
 </button>
 <button class="question__next button_base" (click)="nextQuestion()">Next</button>

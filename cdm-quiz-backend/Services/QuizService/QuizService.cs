@@ -1,4 +1,5 @@
 using cdm_quiz_backend.Models.Backend;
+using cdm_quiz_backend.Models.Frontend;
 
 namespace cdm_quiz_backend.Services.QuizService
 {
@@ -90,7 +91,7 @@ namespace cdm_quiz_backend.Services.QuizService
         public Task DeleteAsync(Guid id)
         {
             var quizToRemove = _quizzes.FirstOrDefault(q => q.Id == id);
-            if(quizToRemove != null)
+            if (quizToRemove != null)
             {
                 _quizzes.Remove(quizToRemove);
             }
@@ -100,7 +101,7 @@ namespace cdm_quiz_backend.Services.QuizService
         public Task<Quiz> GetAsync(Guid id)
         {
             var quiz = _quizzes.FirstOrDefault(q => q.Id == id);
-            if(quiz != null)
+            if (quiz != null)
             {
                 return Task.FromResult(quiz);
             }
@@ -110,13 +111,35 @@ namespace cdm_quiz_backend.Services.QuizService
         public Task UpdateAsync(Guid id, Quiz item)
         {
             var existingQuiz = _quizzes.FirstOrDefault(q => q.Id == id);
-            if(existingQuiz != null)
+            if (existingQuiz != null)
             {
                 existingQuiz.Name = item.Name;
                 existingQuiz.Questions = item.Questions;
                 return Task.CompletedTask;
             }
             return Task.FromResult(false);
+        }
+
+        public Task<AnswerResultModel> ChooseAnswer(AnswerModel answer)
+        {
+            var currentQuiz = _quizzes.FirstOrDefault(q => q.Id.ToString() == answer.QuizId);
+            if (currentQuiz != null)
+            {
+                var currentQuestion = currentQuiz?.Questions?.FirstOrDefault(q => q.Id.ToString() == answer.QuestionId);
+                if (currentQuestion != null)
+                {
+                    bool value = false;
+                    currentQuestion?.Answers?.TryGetValue(answer.AnswerString, out value);
+                    int indexOfTrue = currentQuestion.Answers.Values.ToList().IndexOf(true); // исправить
+                    AnswerResultModel result = new()
+                    {
+                        Result = value,
+                        Index = indexOfTrue
+                    };
+                    return Task.FromResult(result);
+                }
+            }
+            throw new InvalidOperationException("Question or quiz not found.");
         }
     }
 }

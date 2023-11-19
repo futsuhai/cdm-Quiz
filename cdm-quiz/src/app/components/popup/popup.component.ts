@@ -20,10 +20,9 @@ export class PopupComponent {
   public currentQuiz!: IQuiz;
   public phase: Phase = "Start";
   public score: number = 0;
+  public answerResult?: IAnswerResult | null;
 
-  public answerResult?: IAnswerResult;//
-
-  constructor(private quizService: QuizService) { 
+  constructor(private quizService: QuizService) {
     this.getQuizzes();
   }
 
@@ -32,21 +31,24 @@ export class PopupComponent {
     this.phase = "Progress";
   }
 
-  public endQuiz(score: number): void {
+  public endQuiz(): void {
     this.phase = "End"
-    this.score = score
   }
 
   public restart(): void {
     this.phase = "Start"
     this.score = 0;
+    this.answerResult = null;
   }
 
   public async getQuizzes(): Promise<void> {
     this.quizzes = await this.quizService.getQuizzes();
   }
 
-  public async getQuiz(id: string): Promise<void> {
-    this.currentQuiz = await this.quizService.getQuiz(id);
+  public async chooseAnswer(answer: IAnswer): Promise<void> {
+    this.answerResult = await this.quizService.chooseAnswer(answer);
+    if (this.answerResult.result === true) {
+      this.score++;
+    }
   }
 }
