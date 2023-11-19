@@ -11,6 +11,8 @@ import { IAnswerResult } from '../models/answerResult.model';
 })
 export class QuizService extends BaseService {
 
+  // тут прям переусложнено. Можно обойтись без наследования.
+  // Создаешь сервис RestService и при помощи DI инжектишь его сюда. так не надо будет пробрасывать HttpClient и NgZone
   constructor(
     http: HttpClient,
     zone: NgZone,
@@ -18,6 +20,7 @@ export class QuizService extends BaseService {
   ) { super(http, zone) }
 
   public getQuizzes(): Promise<IQuiz[]> {
+    // Не обязательно выносить это в конфиг
     return this.get(`${this.config.quizzesApi}/GetQuizzes`);
   }
 
