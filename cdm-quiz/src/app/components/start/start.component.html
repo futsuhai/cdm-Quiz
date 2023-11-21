@@ -4,7 +4,8 @@
         class="start-controls__button button_base" 
         [ngClass]="{'button_active' : selectedQuizIndex == i}"
         *ngFor="let quiz of quizzes; let i = index"  
-        (click)="selectQuiz(quiz, i)">
+        (click)="selectQuiz(quiz, i)"
+    >
         {{ quiz.name }} Quiz
     </button>
 </div>

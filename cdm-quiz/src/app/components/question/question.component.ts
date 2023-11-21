@@ -22,13 +22,13 @@ export class QuestionComponent implements OnChanges {
 
   public userAnswerIndex!: number;
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: SimpleChanges): void { // Старайся не оставлять пустые lifecycle хуки
 
   }
 
   public nextQuestion(): void {
     if (this.currentQuestionsIndex < this.quiz.questions.length) {
-      console.log(this.answerResult)
+      console.log(this.answerResult) // и логи
       this.currentQuestionsIndex++;
       if (this.currentQuestionsIndex == this.quiz.questions.length) {
         this.endedQuiz.emit();
