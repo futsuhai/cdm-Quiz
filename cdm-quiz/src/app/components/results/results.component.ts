@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'results',
+  selector: 'app-results',
   templateUrl: './results.component.html',
   styleUrls: ['./results.component.scss'],
   host: {

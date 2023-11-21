@@ -4,7 +4,7 @@ import { IAnswerResult } from 'src/app/models/answerResult.model';
 import { IQuiz } from 'src/app/models/quiz.model';
 
 @Component({
-  selector: 'question',
+  selector: 'app-question',
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss'],
   host: {

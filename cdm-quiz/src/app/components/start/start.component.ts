@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IQuiz } from 'src/app/models/quiz.model';
 
 @Component({
-  selector: 'start',
+  selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.scss'],
   host: {
