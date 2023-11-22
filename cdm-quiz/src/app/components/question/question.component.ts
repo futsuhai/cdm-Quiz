@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { IAnswer } from 'src/app/models/answer.model';
 import { IAnswerResult } from 'src/app/models/answerResult.model';
+import { IQuestion } from 'src/app/models/question.model';
 import { IQuiz } from 'src/app/models/quiz.model';
 
 @Component({
@@ -19,10 +20,10 @@ export class QuestionComponent {
   @Output() public endedQuiz = new EventEmitter<number>();
   @Output() public choosedAnswer = new EventEmitter<IAnswer>();
   public currentQuestionsIndex: number = 0;
-  public userAnswerIndex!: number;
+  public userAnswerIndex!: number | null;
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    
+  public get currentQuestion(): IQuestion {
+    return this.quiz.questions[this.currentQuestionsIndex];
   }
 
   public get questionTitle(): string {
@@ -40,6 +41,7 @@ export class QuestionComponent {
       }
     }
     this.answerResult = null;
+    this.userAnswerIndex = null;
   }
 
   public chooseAnswer(quizId: string, questionId: string, answerOption: string, userAnswerIndex: number) {
