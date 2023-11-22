@@ -16,7 +16,7 @@ import { QuizService } from 'src/app/services/quiz.service';
 
 export class PopupComponent implements OnInit {
 
-  public quizzes: IQuiz[] = [];  // эта переменная нужна только для того, чтобы её передали внутрь start. Можно её инициализацию туда и перенести
+  public quizzes: IQuiz[] = [];
   public currentQuiz!: IQuiz;
   public phase: Phase = Phase.Start;
   public score: number = 0;
