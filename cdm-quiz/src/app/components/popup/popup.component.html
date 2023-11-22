@@ -1,19 +1,22 @@
-<div class="container" [ngSwitch]="phase">
+<div [ngSwitch]="phase" class="container">
     <h2 class="container__title">Simple Quiz</h2>
     <hr class="container__divider">
-    <app-start *ngSwitchCase="'Start'"
+    <app-start 
+        *ngSwitchCase="'Start'"
         class="container__start" 
         [quizzes]="quizzes"
         (startedQuiz)="startQuiz($event)">
     </app-start>
-    <app-question *ngSwitchCase="'Progress'"
+    <app-question 
+        *ngSwitchCase="'Progress'"
         class="container__question"
         [quiz]="currentQuiz"
         [answerResult]="answerResult"
         (choosedAnswer)="chooseAnswer($event)"
         (endedQuiz)="endQuiz()">
     </app-question>
-    <app-results *ngSwitchCase="'End'"
+    <app-results 
+        *ngSwitchCase="'End'"
         class="container__results"
         [score]="score"
         [length]="currentQuiz.questions.length"

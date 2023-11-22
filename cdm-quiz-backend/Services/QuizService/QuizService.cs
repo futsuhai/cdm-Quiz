@@ -129,7 +129,7 @@ namespace cdm_quiz_backend.Services.QuizService
                 if (currentQuestion != null)
                 {
                     bool value = false;
-                    currentQuestion?.Answers?.TryGetValue(answer.AnswerString, out value);
+                    currentQuestion?.Answers?.TryGetValue(answer.AnswerOption, out value);
                     int indexOfTrue = currentQuestion.Answers.Values.ToList().IndexOf(true); // исправить
                     AnswerResultModel result = new()
                     {

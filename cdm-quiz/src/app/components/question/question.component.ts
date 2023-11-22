@@ -12,23 +12,28 @@ import { IQuiz } from 'src/app/models/quiz.model';
   }
 })
 
-export class QuestionComponent implements OnChanges {
+export class QuestionComponent {
 
   @Input() answerResult?: IAnswerResult | null;
   @Input() quiz!: IQuiz;
   @Output() public endedQuiz = new EventEmitter<number>();
   @Output() public choosedAnswer = new EventEmitter<IAnswer>();
   public currentQuestionsIndex: number = 0;
-
   public userAnswerIndex!: number;
 
-  public ngOnChanges(changes: SimpleChanges): void { // Старайся не оставлять пустые lifecycle хуки
+  public ngOnChanges(changes: SimpleChanges): void {
+    
+  }
 
+  public get questionTitle(): string {
+    if (this.quiz?.questions && this.currentQuestionsIndex < this.quiz.questions.length) {
+      return this.quiz.questions[this.currentQuestionsIndex].title;
+    }
+    return '';
   }
 
   public nextQuestion(): void {
     if (this.currentQuestionsIndex < this.quiz.questions.length) {
-      console.log(this.answerResult) // и логи
       this.currentQuestionsIndex++;
       if (this.currentQuestionsIndex == this.quiz.questions.length) {
         this.endedQuiz.emit();
@@ -37,11 +42,11 @@ export class QuestionComponent implements OnChanges {
     this.answerResult = null;
   }
 
-  public chooseAnswer(quizId: string, questionId: string, answerString: string, userAnswerIndex: number) {
+  public chooseAnswer(quizId: string, questionId: string, answerOption: string, userAnswerIndex: number) {
     const answer: IAnswer = {
       quizId: quizId,
       questionId: questionId,
-      answerString: answerString
+      answerOption: answerOption
     }
     this.choosedAnswer.emit(answer);
     this.userAnswerIndex = userAnswerIndex;

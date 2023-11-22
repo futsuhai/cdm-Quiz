@@ -1,27 +1,13 @@
-<h3 class="question__title">{{ quiz.questions[currentQuestionsIndex].title }}</h3>
+<h3 class="question__title">{{ questionTitle }}</h3>
 <button 
     *ngFor="let answer of quiz.questions[currentQuestionsIndex].answers; let i = index" 
-    [ngClass]="{ 
-        'question__answer_valid' : (answerResult?.index == i),
-        'question__answer_invalid' : (answerResult?.result === false && userAnswerIndex == i) 
-            }"
+    [ngClass]="{
+                'question__answer_valid' : (answerResult?.index == i),
+                'question__answer_invalid' : (answerResult?.result === false && userAnswerIndex == i) 
+               }"
     class="question__answer"
-    (click)="chooseAnswer(
-        quiz.id,
-        quiz.questions[currentQuestionsIndex].id,
-        answer, i)">
-    <!-- В ангуляре очень часто применяется форматирование - 1 аттрибут - 1 строка, так намного проще читать-->
-    <!--
-     Плюс принято сортировать теги в таком порядке.
-    1. Структурные директивы (ngIf, ngFOr и тп)
-    2. HTML аттрибуты без значений (required и тп)
-    3. HTML аттрибуты с значениями значений (class, id и тп)
-    4. всё что с квадратными скобками (кроме Input)
-    5. Input
-    6. обработчики (click и тп)
-    7. Output
-    Это в принципе не критично и не является чем-то обязательым, просто так код более структурирован и упорядочен
-    -->
+    (click)="chooseAnswer(quiz.id, quiz.questions[currentQuestionsIndex].id, answer, i)">
     {{ answer }}
 </button>
 <button class="question__next button_base" (click)="nextQuestion()">Next</button>
+
