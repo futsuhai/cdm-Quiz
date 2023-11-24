@@ -1,4 +1,6 @@
 <h3 class="question__title">{{ questionTitle }}</h3>
+
+<!--Я бы вынес весь button в отдельный  компонент (например app-question-answer), и в цикле его перечислял, так и читать проще и разбитие по компонентам "приятное" -->
 <button 
     *ngFor="let answer of currentQuestion.answers; let i = index" 
     [ngClass]="{

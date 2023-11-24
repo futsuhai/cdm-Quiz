@@ -44,6 +44,9 @@ export class PopupComponent implements OnInit {
   }
 
   public getQuizzes(): void {
+    // Вот тут я настоятельно рекомендую почитать про отписки в ангуляре
+    // https://blog.bitsrc.io/6-ways-to-unsubscribe-from-observables-in-angular-ab912819a78f?gi=550ab047c3d8
+    // в данном случае обрати внимание на async пайп
     this.quizService.getQuizzes().subscribe(
       (quizzes: IQuiz[]) => {
         this.quizzes = quizzes;
@@ -55,7 +58,7 @@ export class PopupComponent implements OnInit {
     this.quizService.chooseAnswer(answer).subscribe(
       (result: IAnswerResult) => {
         this.answerResult = result;
-        if (this.answerResult.result === true) {
+        if (this.answerResult.result) {
           this.score++;
         }
       }

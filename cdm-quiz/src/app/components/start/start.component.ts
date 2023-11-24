@@ -17,7 +17,7 @@ export class StartComponent {
   public selectedQuizIndex!: number;
 
   public startQuiz(currentQuiz: IQuiz): void {
-    if (this.selectedQuizIndex != undefined) {
+    if (this.selectedQuizIndex != undefined) { // Можно немного упростить  "if (this.selectedQuizIndex)"
       this.startedQuiz.emit(currentQuiz);
     }
   }
