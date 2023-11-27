@@ -1,5 +1,5 @@
 Frontend
-1. Перейти в папку cdm-quiz и выполнить nmp install
+1. Перейти в папку cdm-quiz и выполнить npm install
 2. Перейти в терминал cdm-quiz и выполнить ng serve
 
 Backend

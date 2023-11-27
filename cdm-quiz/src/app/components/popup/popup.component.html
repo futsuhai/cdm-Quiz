@@ -1,6 +1,7 @@
 <div [ngSwitch]="phase$ | async" class="container">
     <h2 class="container__title">Simple Quiz</h2>
     <hr class="container__divider">
+    <!-- Если у тебя phase - enum, то и в *ngSwitchCase=" тоже надо использовать enum-->
     <app-start 
         *ngSwitchCase="'Start'"
         class="container__start" 
