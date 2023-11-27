@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { IQuiz } from 'src/app/models/quiz.model';
+import { QuizState } from 'src/app/services/quiz-state.module';
 
 @Component({
   selector: 'app-start',
@@ -11,14 +13,15 @@ import { IQuiz } from 'src/app/models/quiz.model';
 })
 export class StartComponent {
 
-  @Output() public startedQuiz = new EventEmitter<IQuiz>();
-  @Input() quizzes!: IQuiz[];
+  @Input() quizzes$!: Observable<IQuiz[]>;
   public currentQuiz!: IQuiz;
   public selectedQuizIndex!: number;
 
+  constructor(private quizState: QuizState) { }
+
   public startQuiz(currentQuiz: IQuiz): void {
-    if (this.selectedQuizIndex != undefined) {
-      this.startedQuiz.emit(currentQuiz);
+    if (typeof this.selectedQuizIndex === 'number') { // "if (this.selectedQuizIndex)" не получилось потому что при индексе равном 0 условие не выполняется
+      this.quizState.startQuiz(currentQuiz);
     }
   }
 

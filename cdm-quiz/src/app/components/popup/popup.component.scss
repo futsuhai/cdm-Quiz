@@ -14,12 +14,12 @@
         background: var(--grey-normal);
     }
 
-    &__question, &__start, &__results {
+    &__questions, &__start, &__results {
         width: 100%;
     }
 }
 
-.question {
+.questions {
     display: flex;
     flex-direction: column;
     gap: 16px;

@@ -1,0 +1,14 @@
+<h3 class="questions__title">{{ questionTitle }}</h3>
+<button 
+    *ngFor="let answer of currentQuestion.answers; let i = index" 
+    [ngClass]="{
+                'questions__answer_valid' : ((answerResult$ | async)?.index == i),
+                'questions__answer_invalid' : ((answerResult$ | async)?.result === false && userAnswerIndex == i) 
+               }"
+    class="questions__answer"
+    [disabled]="userAnswerIndex != null"
+    (click)="chooseAnswer(currentQuiz.id, currentQuestion.id, answer, i)">
+    {{ answer }}
+</button>
+<button class="questions__next button_base" (click)="nextQuestion()">Next</button>
+

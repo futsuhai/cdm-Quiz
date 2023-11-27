@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IAnswer } from 'src/app/models/answer.model';
-import { IAnswerResult } from 'src/app/models/answerResult.model';
+import { Observable, Subscription } from 'rxjs';
 import { IQuiz, Phase } from 'src/app/models/quiz.model';
+import { QuizState } from 'src/app/services/quiz-state.module';
 import { QuizService } from 'src/app/services/quiz.service';
 
 @Component({
@@ -16,49 +15,15 @@ import { QuizService } from 'src/app/services/quiz.service';
 
 export class PopupComponent implements OnInit {
 
-  public quizzes: IQuiz[] = [];
-  public currentQuiz!: IQuiz;
-  public phase: Phase = Phase.Start;
-  public score: number = 0;
-  public answerResult?: IAnswerResult | null;
+  public quizzes$!: Observable<IQuiz[]>;
+  public phase$!: Observable<Phase>;
 
-  constructor(private quizService: QuizService) { }
+  constructor(
+    private quizService: QuizService,
+    private quizState: QuizState) { }
 
   public ngOnInit(): void {
-    this.getQuizzes();
-  }
-
-  public startQuiz(currentQuiz: IQuiz): void {
-    this.currentQuiz = currentQuiz;
-    this.phase = Phase.Progress;
-  }
-
-  public endQuiz(): void {
-    this.phase = Phase.End;
-  }
-
-  public restart(): void {
-    this.phase = Phase.Start;
-    this.score = 0;
-    this.answerResult = null;
-  }
-
-  public getQuizzes(): void {
-    this.quizService.getQuizzes().subscribe(
-      (quizzes: IQuiz[]) => {
-        this.quizzes = quizzes;
-      }
-    )
-  }
-
-  public chooseAnswer(answer: IAnswer): void {
-    this.quizService.chooseAnswer(answer).subscribe(
-      (result: IAnswerResult) => {
-        this.answerResult = result;
-        if (this.answerResult.result === true) {
-          this.score++;
-        }
-      }
-    );
+    this.quizzes$ = this.quizService.getQuizzes();
+    this.phase$ = this.quizState.phaseSubject;
   }
 }

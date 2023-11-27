@@ -1,25 +1,17 @@
-<div [ngSwitch]="phase" class="container">
+<div [ngSwitch]="phase$ | async" class="container">
     <h2 class="container__title">Simple Quiz</h2>
     <hr class="container__divider">
     <app-start 
         *ngSwitchCase="'Start'"
         class="container__start" 
-        [quizzes]="quizzes"
-        (startedQuiz)="startQuiz($event)">
+        [quizzes$]="quizzes$">
     </app-start>
-    <app-question 
+    <app-questions 
         *ngSwitchCase="'Progress'"
-        class="container__question"
-        [quiz]="currentQuiz"
-        [answerResult]="answerResult"
-        (choosedAnswer)="chooseAnswer($event)"
-        (endedQuiz)="endQuiz()">
-    </app-question>
+        class="container__questions">
+    </app-questions>
     <app-results 
         *ngSwitchCase="'End'"
-        class="container__results"
-        [score]="score"
-        [length]="currentQuiz.questions.length"
-        (restartedQuiz)="restart()">
+        class="container__results">
     </app-results>
 </div>

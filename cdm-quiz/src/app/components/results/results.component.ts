@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { QuizState } from 'src/app/services/quiz-state.module';
 
 @Component({
   selector: 'app-results',
@@ -8,13 +9,19 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     class: "results"
   }
 })
-export class ResultsComponent {
+export class ResultsComponent implements OnInit {
 
-  @Output() public restartedQuiz = new EventEmitter<void>();
-  @Input() score!: number;
-  @Input() length!: number;
+  public score!: number;
+  public length!: number;
+
+  constructor(private quizState: QuizState) { }
+
+  public ngOnInit(): void {
+    this.length = this.quizState.currentQuiz.questions.length;
+    this.score = this.quizState.score;
+  }
 
   public restart(): void {
-    this.restartedQuiz.emit();
+    this.quizState.restart()
   }
 }
