@@ -2,7 +2,7 @@
 <div class="start-controls">
     <button 
         *ngFor="let quiz of quizzes$ | async; let i = index"  
-        [ngClass]="{'button_active' : selectedQuizIndex == i}"
+        [ngClass]="{'button_active' : selectedQuizIndex === i}"
         class="start-controls__button button_base" 
         (click)="selectQuiz(quiz, i)">
         {{ quiz.name }} Quiz

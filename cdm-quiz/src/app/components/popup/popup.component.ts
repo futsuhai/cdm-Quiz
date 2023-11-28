@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IQuiz, Phase } from 'src/app/models/quiz.model';
 import { QuizState } from 'src/app/services/quiz-state.module';
 import { QuizService } from 'src/app/services/quiz.service';
@@ -9,7 +9,7 @@ import { QuizService } from 'src/app/services/quiz.service';
   templateUrl: './popup.component.html',
   styleUrls: ['./popup.component.scss'],
   host: {
-    class: "popup"
+    class: "popup",
   }
 })
 

@@ -3,7 +3,7 @@ import { IQuiz } from '../models/quiz.model';
 import { IAnswer } from '../models/answer.model';
 import { IAnswerResult } from '../models/answerResult.model';
 import { RestService } from './rest.service';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class QuizService {
   public getQuizzes(): Observable<IQuiz[]> {
     const endpoint: string = `${this.api}/GetQuizzes`;
     return this.restService.restGET<IQuiz[]>(endpoint).pipe(
-      catchError((error: any) => {
+      catchError((error: unknown) => {
         console.log('An error occurred while fetching quizzes:', error);
         return [];
       })
@@ -29,7 +29,7 @@ export class QuizService {
   public chooseAnswer(body: IAnswer): Observable<IAnswerResult> {
     const endpoint: string = `${this.api}/ChooseAnswer`;
     return this.restService.restPUT<IAnswerResult>(endpoint, body).pipe(
-      catchError((error: any) => {
+      catchError((error: unknown) => {
         console.log('An error occurred while choosing an answer:', error);
         return [];
       })

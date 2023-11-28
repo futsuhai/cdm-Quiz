@@ -22,6 +22,6 @@ export class ResultsComponent implements OnInit {
   }
 
   public restart(): void {
-    this.quizState.restart()
+    this.quizState.restart();
   }
 }

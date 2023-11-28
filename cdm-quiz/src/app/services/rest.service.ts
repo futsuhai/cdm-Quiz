@@ -78,7 +78,7 @@ export interface RestOptions extends HttpOptions {
 }
 
 interface HttpOptions {
-  body?: any;
+  body?: unknown;
   headers?: HttpHeaders | {
     [header: string]: string | string[];
   };
