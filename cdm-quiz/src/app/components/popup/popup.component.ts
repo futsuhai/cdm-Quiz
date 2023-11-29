@@ -17,6 +17,7 @@ export class PopupComponent implements OnInit {
 
   public quizzes$!: Observable<IQuiz[]>;
   public phase$!: Observable<Phase>;
+  public quizPhase = Phase;
 
   constructor(
     private quizService: QuizService,

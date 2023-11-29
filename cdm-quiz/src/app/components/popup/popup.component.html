@@ -1,18 +1,17 @@
 <div [ngSwitch]="phase$ | async" class="container">
     <h2 class="container__title">Simple Quiz</h2>
     <hr class="container__divider">
-    <!-- Если у тебя phase - enum, то и в *ngSwitchCase=" тоже надо использовать enum-->
     <app-start 
-        *ngSwitchCase="'Start'"
+        *ngSwitchCase="quizPhase.Start"
         class="container__start" 
         [quizzes$]="quizzes$">
     </app-start>
     <app-questions 
-        *ngSwitchCase="'Progress'"
+        *ngSwitchCase="quizPhase.Progress"
         class="container__questions">
     </app-questions>
     <app-results 
-        *ngSwitchCase="'End'"
+        *ngSwitchCase="quizPhase.End"
         class="container__results">
     </app-results>
 </div>
